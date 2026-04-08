@@ -1,0 +1,85 @@
+﻿using System;
+using System.Windows.Forms;
+namespace AbiturientApp
+{
+    public partial class Abiturient_F : Form
+    {
+        public Abiturient_F()
+        {
+            InitializeComponent();
+        }
+        private void DialogForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (this.DialogResult == DialogResult.OK)
+            {
+                try
+                {
+                    if (Familia_TB.Text.Trim() == "")
+                    {
+                        Familia_TB.Focus();
+                        throw new Exception("Вы не ввели фамилию абитуриента!");
+                    }
+                    if (Shkola_TB.Text.Trim() == "")
+                    {
+                        Shkola_TB.Focus();
+                        throw new Exception("Вы не ввели номер школы!");
+                    }
+                    int shkola;
+                    if (!int.TryParse(Shkola_TB.Text, out shkola))
+                    {
+                        Shkola_TB.Focus();
+                        throw new Exception("Введите целое число для школы!");
+                    }
+                    if (shkola < 1 || shkola > 200)
+                    {
+                        Shkola_TB.Focus();
+                        throw new Exception("Номер школы должен быть от 1 до 200!");
+                    }
+                    if (Shifr_TB.Text.Trim() == "")
+                    {
+                        Shifr_TB.Focus();
+                        throw new Exception("Вы не ввели шифр специальности!");
+                    }
+                    int shifr;
+                    if (!int.TryParse(Shifr_TB.Text, out shifr))
+                    {
+                        Shifr_TB.Focus();
+                        throw new Exception("Введите целое число для шифра!");
+                    }
+
+                    if (shifr < 1 || shifr > 300)
+                    {
+                        Shifr_TB.Focus();
+                        throw new Exception("Шифр должен быть от 1 до 300!");
+                    }
+                    if (Balli_TB.Text.Trim() == "")
+                    {
+                        Balli_TB.Focus();
+                        throw new Exception("Вы не ввели количество баллов!");
+                    }
+                    int ball;
+                    if (!int.TryParse(Balli_TB.Text, out ball))
+                    {
+                        Balli_TB.Focus();
+                        throw new Exception("Введите целое число для баллов!");
+                    }
+                    if (ball < 0 || ball > 200)
+                    {
+                        Balli_TB.Focus();
+                        throw new Exception("Баллы должны быть от 0 до 200!");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    e.Cancel = true; // Останавливаем закрытие формы
+                    MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void Ok_B_Click(object sender, EventArgs e)
+        {
+
+        }
+    }
+}
